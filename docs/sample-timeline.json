@@ -1,0 +1,27 @@
+{
+  "semanticSegments": [
+    {
+      "startTime": "2024-05-03T10:00:00+09:00",
+      "visit": {
+        "topCandidate": {
+          "placeLocation": "geo:35.681236,139.767125"
+        }
+      }
+    },
+    {
+      "startTime": "2024-06-12T13:00:00+09:00",
+      "visit": {
+        "topCandidate": {
+          "placeLocation": "geo:34.693737,135.502165"
+        }
+      }
+    },
+    {
+      "startTime": "2025-01-20T08:00:00-08:00",
+      "location": {
+        "latitudeE7": 377749000,
+        "longitudeE7": -1224194000
+      }
+    }
+  ]
+}

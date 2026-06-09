@@ -1,0 +1,14 @@
+{
+  "semanticSegments": [
+    {
+      "startTime": "2025-01-01T12:00:00.000+09:00",
+      "visit": {
+        "topCandidate": {
+          "placeLocation": {
+            "latLng": "33.5858121°, 130.419654°"
+          }
+        }
+      }
+    }
+  ]
+}

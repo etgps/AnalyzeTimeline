@@ -1,0 +1,11 @@
+C:\Users\etohh\Documents\AnalyzeTimeline\src\Infrastructure\bin\Debug\net10.0\AnalyzeTimeline.Infrastructure.deps.json
+C:\Users\etohh\Documents\AnalyzeTimeline\src\Infrastructure\bin\Debug\net10.0\AnalyzeTimeline.Infrastructure.dll
+C:\Users\etohh\Documents\AnalyzeTimeline\src\Infrastructure\bin\Debug\net10.0\AnalyzeTimeline.Infrastructure.pdb
+C:\Users\etohh\Documents\AnalyzeTimeline\src\Infrastructure\obj\Debug\net10.0\AnalyzeTimeline.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\etohh\Documents\AnalyzeTimeline\src\Infrastructure\obj\Debug\net10.0\AnalyzeTimeline.Infrastructure.AssemblyInfoInputs.cache
+C:\Users\etohh\Documents\AnalyzeTimeline\src\Infrastructure\obj\Debug\net10.0\AnalyzeTimeline.Infrastructure.AssemblyInfo.cs
+C:\Users\etohh\Documents\AnalyzeTimeline\src\Infrastructure\obj\Debug\net10.0\AnalyzeTimeline.Infrastructure.csproj.CoreCompileInputs.cache
+C:\Users\etohh\Documents\AnalyzeTimeline\src\Infrastructure\obj\Debug\net10.0\AnalyzeTimeline.Infrastructure.dll
+C:\Users\etohh\Documents\AnalyzeTimeline\src\Infrastructure\obj\Debug\net10.0\refint\AnalyzeTimeline.Infrastructure.dll
+C:\Users\etohh\Documents\AnalyzeTimeline\src\Infrastructure\obj\Debug\net10.0\AnalyzeTimeline.Infrastructure.pdb
+C:\Users\etohh\Documents\AnalyzeTimeline\src\Infrastructure\obj\Debug\net10.0\ref\AnalyzeTimeline.Infrastructure.dll

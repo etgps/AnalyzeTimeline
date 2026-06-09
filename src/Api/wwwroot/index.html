@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Analyze Timeline</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <main class="shell">
+    <section id="inputScreen" class="screen active">
+      <div class="app-header">
+        <p class="eyebrow">Google Timeline Analyzer</p>
+        <h1>Timeline.json から訪問先レポートを作成</h1>
+        <p class="lead">年度別・月別の訪問先を国別、日本の都道府県別に分類し、HTML としてプレビュー・ダウンロードできます。</p>
+      </div>
+
+      <form id="uploadForm" class="upload-panel">
+        <label class="file-picker">
+          <span>Timeline.json を選択</span>
+          <input id="timelineFile" name="file" type="file" accept="application/json,.json" required>
+        </label>
+        <div id="fileName" class="file-name">ファイルが選択されていません</div>
+        <button id="startButton" class="primary-button" type="submit">分析開始</button>
+        <p id="message" class="message" role="status"></p>
+      </form>
+    </section>
+
+    <section id="outputScreen" class="screen">
+      <div class="toolbar">
+        <button id="backButton" class="secondary-button" type="button">戻る</button>
+        <div class="toolbar-title">
+          <strong>生成結果</strong>
+          <span id="summaryText"></span>
+        </div>
+        <button id="downloadButton" class="primary-button" type="button">HTML をダウンロード</button>
+      </div>
+      <iframe id="previewFrame" title="生成された訪問先レポート"></iframe>
+    </section>
+  </main>
+  <script src="/app.js"></script>
+</body>
+</html>
