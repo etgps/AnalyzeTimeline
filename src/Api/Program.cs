@@ -13,6 +13,7 @@ builder.WebHost.ConfigureKestrel(options =>
 
 builder.Services.AddScoped<ITimelineAnalyzer, TimelineAnalyzer>();
 builder.Services.AddScoped<IReportHtmlGenerator, ReportHtmlGenerator>();
+builder.Services.AddSingleton<ICountryResolver, GeoJsonCountryResolver>();
 builder.Services.AddSingleton<IPrefectureResolver, GeoJsonPrefectureResolver>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.Configure<FormOptions>(options =>

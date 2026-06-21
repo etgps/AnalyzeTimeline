@@ -1,0 +1,29 @@
+# Build artifacts
+[Bb]in/
+[Oo]bj/
+[Out]/
+[Tt]emp/
+
+# Visual Studio
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+*.suo
+*.suo.tmp
+
+# Large data files
+data/**/*.zip
+data/**/*.geojson
+data/**/*.gpkg
+data/**/*.shp
+data/**/*.dbf
+data/**/*.shx
+data/**/*.xml
+data/packages/
+sampledata/
+
+# OS files
+.DS_Store
+Thumbs.db

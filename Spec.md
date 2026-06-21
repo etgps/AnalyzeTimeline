@@ -93,26 +93,15 @@ AnalyzeTimeline は、Google Timeline からエクスポートされた `Timelin
 
 ### 国分類
 
-- 世界の主要国を判定対象にします。
-- 国分類は緯度経度の境界情報により判定します。
-- 判定対象には少なくとも以下を含めます。
-  - Japan
-  - United States
-  - Canada
-  - Mexico
-  - Brazil
-  - United Kingdom
-  - France
-  - Germany
-  - Italy
-  - Spain
-  - China
-  - South Korea
-  - Taiwan
-  - Thailand
-  - Singapore
-  - Australia
-  - New Zealand
+- 国分類は Natural Earth の国境界データを利用して高精度に判定します。
+- ソースデータは `data\natural_earth_vector.gpkg.zip` に配置された GeoPackage とします。
+- `ne_10m_admin_0_countries` レイヤーからアプリ用の `data\natural_earth_countries.geojson` を生成して利用します。
+- GeoJSON の `properties.code` を国コード、`properties.name` を国名として利用します。
+- `Polygon` / `MultiPolygon` の座標を点-in-ポリゴン判定します。
+- Natural Earth の生成済み GeoJSON が見つからない場合のみ、簡易境界ボックス判定に fallback します。
+- 初回読み込み後はポリゴンデータをメモリにキャッシュします。
+- 0.1度グリッドの空間インデックスを利用し、判定対象ポリゴンを絞り込みます。
+- 同一座標の分類結果はリクエスト内でキャッシュします。
 
 ### 日本の都道府県分類
 
@@ -143,6 +132,7 @@ data\N03-20260101_GML\N03-20260101_prefecture.geojson
 - 西日本を China と誤判定しないこと。
 - 未訪問の長野県を表示しないこと。
 - 訪問済みの福岡県を表示すること。
+- 国の訪問先判定は Natural Earth の国境界ポリゴンに基づいて行うこと。
 
 ## 集計仕様
 
@@ -154,9 +144,11 @@ data\N03-20260101_GML\N03-20260101_prefecture.geojson
 
 ### 月別訪問先
 
-- 国および都道府県ごとに集計します。
-- 各訪問先について、最終訪問月を `YYYY-MM` 形式で表示します。
-- 同一訪問先は 1 行にまとめます。
+- 国および都道府県ごと、かつ年度ごとに集計します。
+- 各訪問先について、選択年度内の最終訪問月を `YYYY-MM` 形式で表示します。
+- 同一年度内の同一訪問先は 1 行にまとめます。
+- 生成された HTML 上で年度を選択できるようにします。
+- 年度を切り替えると、月別の世界地図、日本地図、表形式の集計結果を選択年度の内容に更新します。
 
 ### 件数
 
@@ -192,6 +184,7 @@ Timeline JSON を読み込むためのファイル選択ボタンと、分析開
 - 上部に HTML ダウンロードボタンを配置します。
 - 下部に生成 HTML を iframe でプレビュー表示します。
 - 入力画面へ戻るボタンを配置します。
+- 生成 HTML の月別訪問先セクションでは、年度選択ドロップダウンを表示します。
 
 ## 出力 HTML レポート
 
@@ -203,15 +196,23 @@ Timeline JSON を読み込むためのファイル選択ボタンと、分析開
   - 年別訪問先数
   - 月別訪問先数
 - 年別訪問先
-  - 世界の白地図風表示
-  - 日本の白地図風表示
+  - Google Charts GeoChart による世界の白地図表示
+  - Google Charts GeoChart による日本の白地図表示
   - 表形式の集計結果
 - 月別訪問先
-  - 世界の白地図風表示
-  - 日本の白地図風表示
+  - Google Charts GeoChart による世界の白地図表示
+  - Google Charts GeoChart による日本の白地図表示
+  - 年度選択ドロップダウン
   - 表形式の集計結果
 
 訪問済み地域はハイライト表示します。
+
+地図表示には Google Charts の `GeoChart` を利用します。
+
+- 世界地図は ISO 国コードを利用します。
+- 日本地図は `JP-xx` の都道府県コードを利用し、`region: JP`、`resolution: provinces` で描画します。
+- 未訪問地域は白、訪問済み地域はハイライト色で表示します。
+- Google Charts を読み込めない環境では、表形式の結果を主表示として利用します。
 
 ## API 仕様
 
@@ -270,7 +271,7 @@ docker compose -f docker/docker-compose.yml up --build
 ## 今後の拡張候補
 
 - 世界各国の分類も行政区域・国境界ポリゴンデータに置き換える。
-- 生成 HTML の地図表示を SVG または地図ライブラリによる実形状表示にする。
+- Google Charts を利用できないオフライン環境向けに SVG fallback を追加する。
 - 単体テスト・統合テストを追加する。
 - 出力 HTML に訪問年・訪問月のフィルタ機能を追加する。
 - 解析対象を訪問先のみ、移動経路込みなど選択可能にする。

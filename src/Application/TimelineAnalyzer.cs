@@ -5,10 +5,12 @@ namespace AnalyzeTimeline.Application;
 public sealed class TimelineAnalyzer : ITimelineAnalyzer
 {
     private readonly TimelineJsonParser parser = new();
+    private readonly ICountryResolver countryResolver;
     private readonly IPrefectureResolver prefectureResolver;
 
-    public TimelineAnalyzer(IPrefectureResolver prefectureResolver)
+    public TimelineAnalyzer(ICountryResolver countryResolver, IPrefectureResolver prefectureResolver)
     {
+        this.countryResolver = countryResolver;
         this.prefectureResolver = prefectureResolver;
     }
 
@@ -43,10 +45,7 @@ public sealed class TimelineAnalyzer : ITimelineAnalyzer
 
     private IEnumerable<RegionDefinition> ClassifyCore(TimelinePoint point)
     {
-        var country = RegionCatalog.Countries
-            .Where(region => region.Contains(point.Latitude, point.Longitude))
-            .OrderBy(region => region.Area)
-            .FirstOrDefault();
+        var country = countryResolver.Resolve(point.Latitude, point.Longitude);
 
         if (country is not null)
         {
@@ -71,7 +70,8 @@ public sealed class TimelineAnalyzer : ITimelineAnalyzer
             {
                 item.Region.Code,
                 item.Region.Name,
-                item.Region.Group
+                item.Region.Group,
+                Year = granularity == VisitGranularity.Month ? item.Point.VisitedAt.Year : 0
             })
             .Select(group => new VisitRegion(
                 group.Key.Code,

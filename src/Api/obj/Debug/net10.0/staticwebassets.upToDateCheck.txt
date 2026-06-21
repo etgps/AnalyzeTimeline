@@ -1,6 +1,0 @@
-C:\Users\etohh\Documents\AnalyzeTimeline\src\Api\wwwroot\styles.css
-C:\Users\etohh\Documents\AnalyzeTimeline\src\Api\wwwroot\index.html
-C:\Users\etohh\Documents\AnalyzeTimeline\src\Api\wwwroot\app.js
-wwwroot\app.js
-wwwroot\index.html
-wwwroot\styles.css
